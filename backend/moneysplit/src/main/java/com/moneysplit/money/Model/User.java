@@ -3,44 +3,23 @@ package com.moneysplit.money.Model;
 import java.util.*;
 
 public class User {
-    private Long id;
+    private Integer id;
     private String name;
     private String email;
     private double runningCost;
 
-    private List<Group> userGroup;
-
-    public User() {
-    }
-
-    public User(Long id, String name, String email, double runningCost, List<Group> userGroup) {
+    public User(int id, String name, String email, double runningCost) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.runningCost = runningCost;
-        this.userGroup = userGroup;
     }
 
-    public User(String name, String email, double runningCost, List<Group> userGroup) {
-        this.name = name;
-        this.email = email;
-        this.runningCost = runningCost;
-        this.userGroup = userGroup;
-    }
-
-    public List<Group> getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(List<Group> userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -68,7 +47,6 @@ public class User {
         this.runningCost = runningCost;
     }
 
-
     @Override
     public String toString() {
         return "User{" +
@@ -76,7 +54,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", runningCost=" + runningCost +
-                ", userGroup=" + userGroup +
                 '}';
     }
 }

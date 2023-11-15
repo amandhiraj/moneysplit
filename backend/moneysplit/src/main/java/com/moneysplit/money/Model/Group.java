@@ -11,6 +11,7 @@ public class Group {
     private Integer numPPL;
     private List<Map.Entry<Map.Entry<String, String>, Double>> expenses;
 
+
     public Group() {
 
     }
