@@ -6,20 +6,26 @@ public class User {
     private Integer id;
     private String name;
     private String email;
-    private double runningCost;
 
-    public User(int id, String name, String email, double runningCost) {
+    public User() {
+    }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public User(Integer id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.runningCost = runningCost;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,21 +45,12 @@ public class User {
         this.email = email;
     }
 
-    public double getRunningCost() {
-        return runningCost;
-    }
-
-    public void setRunningCost(double runningCost) {
-        this.runningCost = runningCost;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", runningCost=" + runningCost +
                 '}';
     }
 }

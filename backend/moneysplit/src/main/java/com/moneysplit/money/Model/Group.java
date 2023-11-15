@@ -9,20 +9,22 @@ public class Group {
     private String groupID;
     private String name;
     private Integer numPPL;
-    private List<Map.Entry<Map.Entry<String, String>, Double>> expenses;
+    private List<Expense> expenses;
 
-
-    public Group() {
-
-    }
-
-    public Group(String groupID, String name, Integer numPPL, List<Map.Entry<Map.Entry<String, String>, Double>> expenses) {
+    public Group(String groupID, String name, Integer numPPL, List<Expense> expenses) {
         this.groupID = groupID;
         this.name = name;
         this.numPPL = numPPL;
         this.expenses = expenses;
     }
 
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 
     public String getGroupID() {
         return groupID;
@@ -48,13 +50,6 @@ public class Group {
         this.numPPL = numPPL;
     }
 
-    public List<Map.Entry<Map.Entry<String, String>, Double>> getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(List<Map.Entry<Map.Entry<String, String>, Double>> expenses) {
-        this.expenses = expenses;
-    }
 
     @Override
     public String toString() {
@@ -62,7 +57,6 @@ public class Group {
                 "groupID='" + groupID + '\'' +
                 ", name='" + name + '\'' +
                 ", numPPL=" + numPPL +
-                ", expenses=" + expenses +
                 '}';
     }
 }

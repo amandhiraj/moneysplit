@@ -18,19 +18,33 @@ import java.util.Map;
 public class UserController {
 
     @GetMapping
-    public ResponseEntity<Expense> getUsers() {
-        List<User> people = new ArrayList<>();
+    public ResponseEntity<Group> getUsers() {
 
-        User user1 = new User(1, "aman", "ama@gmail.com", 20);
-        User user2 = new User(1, "aman", "ama@gmail.com", 20);
-        User user3 = new User(1, "aman", "ama@gmail.com", 20);
+        //make a user object
+        List<User> users = new ArrayList<>();
+        User user1 = new User(1, "Aman", "ama@gmail.com");
+        User user2 = new User(1, "Vamsi", "vamsi@gmail.com");
+        User user3 = new User(1, "Pranav", "pranav@gmail.com");
 
-        people.add(user1);
-        people.add(user2);
-        people.add(user3);
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        //make an expense object
 
-        Expense ex = new Expense("Food", 100.0, people);
+        List<Expense> expense = new ArrayList<>();
 
-        return new ResponseEntity<>(ex,HttpStatus.OK);
+        Expense expense1 = new Expense("Food", 100.0, users);
+        Expense expense2 = new Expense("Liqs", 100.0, users);
+
+        expense.add(expense1);
+        expense.add(expense2);
+
+        //make a group object
+        List<Group> group = new ArrayList<>();
+        Group group1 = new Group("2sa5D", "DR TRIP", 4, expense);
+
+        group.add(group1);
+
+        return new ResponseEntity<>(group1 , HttpStatus.OK);
     }
 }
