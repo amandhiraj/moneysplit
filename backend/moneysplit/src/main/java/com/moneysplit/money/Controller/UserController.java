@@ -1,22 +1,17 @@
-package com.moneysplit.money.User;
+package com.moneysplit.money.Controller;
 
+import com.moneysplit.money.Model.Group;
+import com.moneysplit.money.Model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/v1/users")
 public class UserController {
-
-
-    //List<Map.Entry<Map.Entry<String, String>, Double>>
-
-
     @GetMapping
     public List<User> getUsers() {
 

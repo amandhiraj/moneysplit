@@ -1,4 +1,4 @@
-package com.moneysplit.money.User;
+package com.moneysplit.money.Model;
 
 import java.util.*;
 
