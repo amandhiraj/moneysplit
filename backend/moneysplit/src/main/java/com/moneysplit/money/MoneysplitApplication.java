@@ -18,6 +18,7 @@ public class MoneysplitApplication {
     public static void main(String[] args) {
         SpringApplication.run(MoneysplitApplication.class, args);
     }
+    //uncomment to get an idea of how the entry looks like
 //    @Bean
 //    CommandLineRunner runner(ExpenseRepository repository){
 //        return args -> {
