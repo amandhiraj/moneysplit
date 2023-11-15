@@ -16,7 +16,8 @@ public class UserService {
                         1,
                         "Aman",
                         "Amandhiraj@live.ca",
-                        "sA34Das"
+                        "sA34Das",
+                        10
                 )
         );
     }

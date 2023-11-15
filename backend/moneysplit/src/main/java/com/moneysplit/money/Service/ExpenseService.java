@@ -14,7 +14,7 @@ public class ExpenseService {
     public List<Expense> getExpenses() {
 
         List<User> users = new ArrayList<>();
-        User user1 = new User(1, "aman", "amandhiraj@live.ca", "sA34Das");
+        User user1 = new User(1, "aman", "amandhiraj@live.ca", "sA34Das", 10);
 
         users.add(user1);
 
