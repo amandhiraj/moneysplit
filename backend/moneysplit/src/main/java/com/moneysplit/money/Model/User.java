@@ -1,24 +1,34 @@
 package com.moneysplit.money.Model;
 
-import java.util.*;
-
 public class User {
     private Integer id;
     private String name;
     private String email;
 
+    private String groupID;
+
     public User() {
     }
 
-    public User(String name, String email) {
+    public User(String name, String email, String groupID) {
         this.name = name;
         this.email = email;
+        this.groupID = groupID;
     }
 
-    public User(Integer id, String name, String email) {
+    public User(Integer id, String name, String email, String groupID) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.groupID = groupID;
+    }
+
+    public String getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
     }
 
     public Integer getId() {
