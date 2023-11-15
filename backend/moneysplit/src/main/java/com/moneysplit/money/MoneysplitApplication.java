@@ -15,15 +15,4 @@ public class MoneysplitApplication {
         SpringApplication.run(MoneysplitApplication.class, args);
     }
 
-    @GetMapping
-    public List<User> hello() {
-        return List.of(
-                new User(
-                        1L,
-                        "Aman",
-                        "amandhiraj@gmail.com",
-                        20.2
-                )
-        );
-    }
 }

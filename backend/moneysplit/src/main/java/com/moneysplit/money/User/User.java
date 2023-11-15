@@ -1,25 +1,39 @@
 package com.moneysplit.money.User;
 
+import java.util.*;
+
 public class User {
     private Long id;
     private String name;
     private String email;
     private double runningCost;
 
+    private List<Group> userGroup;
+
     public User() {
     }
 
-    public User(Long id, String name, String email, double runningCost) {
+    public User(Long id, String name, String email, double runningCost, List<Group> userGroup) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.runningCost = runningCost;
+        this.userGroup = userGroup;
     }
 
-    public User(String name, String email, double runningCost) {
+    public User(String name, String email, double runningCost, List<Group> userGroup) {
         this.name = name;
         this.email = email;
         this.runningCost = runningCost;
+        this.userGroup = userGroup;
+    }
+
+    public List<Group> getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(List<Group> userGroup) {
+        this.userGroup = userGroup;
     }
 
     public Long getId() {
@@ -54,13 +68,15 @@ public class User {
         this.runningCost = runningCost;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+
+    @Override
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", runningCost=" + runningCost +
+                ", userGroup=" + userGroup +
                 '}';
     }
 }
