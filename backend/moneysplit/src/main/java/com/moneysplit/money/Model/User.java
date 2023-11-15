@@ -1,46 +1,26 @@
 package com.moneysplit.money.Model;
 
-import java.util.*;
-
 public class User {
-    private Long id;
+    private Integer id;
     private String name;
     private String email;
-    private double runningCost;
 
-    private List<Group> userGroup;
+    private String groupID;
+    private double netAmount;
 
-    public User() {
-    }
-
-    public User(Long id, String name, String email, double runningCost, List<Group> userGroup) {
+    public User(Integer id, String name, String email, String groupID, double netAmount) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.runningCost = runningCost;
-        this.userGroup = userGroup;
+        this.groupID = groupID;
+        this.netAmount = netAmount;
     }
 
-    public User(String name, String email, double runningCost, List<Group> userGroup) {
-        this.name = name;
-        this.email = email;
-        this.runningCost = runningCost;
-        this.userGroup = userGroup;
-    }
-
-    public List<Group> getUserGroup() {
-        return userGroup;
-    }
-
-    public void setUserGroup(List<Group> userGroup) {
-        this.userGroup = userGroup;
-    }
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,14 +40,21 @@ public class User {
         this.email = email;
     }
 
-    public double getRunningCost() {
-        return runningCost;
+    public String getGroupID() {
+        return groupID;
     }
 
-    public void setRunningCost(double runningCost) {
-        this.runningCost = runningCost;
+    public void setGroupID(String groupID) {
+        this.groupID = groupID;
     }
 
+    public double getNetAmount() {
+        return netAmount;
+    }
+
+    public void setNetAmount(double netAmount) {
+        this.netAmount = netAmount;
+    }
 
     @Override
     public String toString() {
@@ -75,8 +62,8 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", runningCost=" + runningCost +
-                ", userGroup=" + userGroup +
+                ", groupID='" + groupID + '\'' +
+                ", netAmount=" + netAmount +
                 '}';
     }
 }
