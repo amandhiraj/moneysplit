@@ -1,30 +1,19 @@
 package com.moneysplit.money.Service;
 
 import com.moneysplit.money.Model.Expense;
-import com.moneysplit.money.Model.User;
+import com.moneysplit.money.Repository.ExpenseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class ExpenseService {
+    private final ExpenseRepository expenseRepository;
     @GetMapping
     public List<Expense> getExpenses() {
-
-        List<User> users = new ArrayList<>();
-        User user1 = new User(1, "aman", "amandhiraj@live.ca", "sA34Das", 10);
-
-        users.add(user1);
-
-        return List.of(
-                new Expense(
-                        "Food",
-                        100.0,
-                        users
-                )
-        );
+        return expenseRepository.findAll();
     }
 
 }
