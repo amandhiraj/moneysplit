@@ -7,7 +7,7 @@
 docker compose -f docker-compose.yaml -p moneysplit up -d
 ```
 4) Use `localhost:8080` for responses
-5) `Optionals` : Uncomment the function in MoneysplitApplication to populate the database
+5) `Optional` : Uncomment the function in MoneysplitApplication to populate the database
 # MongoDB
 
 Use `localhost:8081` to open up mongodb UI interface
