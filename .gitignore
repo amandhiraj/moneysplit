@@ -40,11 +40,6 @@
  *.iml
  *.ipr
 
- ../.idea/
- .DS_Store
- moneysplit/.DS_Store
- moneysplit/target/
-
 # CMake
 cmake-build-*/
 
