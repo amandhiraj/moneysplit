@@ -77,3 +77,53 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/frontend/moneysplit/node_modules
+/frontend/moneysplit/.pnp
+/frontend/moneysplit/.pnp.js
+
+# testing
+/frontend/moneysplit/coverage
+
+# production
+/frontend/moneysplit/build
+
+# misc
+/frontend/moneysplit/.DS_Store
+/frontend/moneysplit/.env.local
+/frontend/moneysplit/.env.development.local
+/frontend/moneysplit/.env.test.local
+/frontend/moneysplit/.env.production.local
+
+/frontend/moneysplit/npm-debug.log*
+/frontend/moneysplit/yarn-debug.log*
+/frontend/moneysplit/yarn-error.log*
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
