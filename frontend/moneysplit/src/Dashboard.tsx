@@ -20,6 +20,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import NavigationBar from './NavigationBar';
+import logoImage from './logo_nb.png';
 
 function Copyright(props: any) {
   return (
@@ -85,7 +87,22 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      light: '#c0c0c0',
+      main: '#ffffff',
+      dark: '#ffffff',
+      contrastText: '#000000',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
@@ -97,60 +114,7 @@ export default function Dashboard() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
-        </Drawer>
+        <NavigationBar/>
         <Box
           component="main"
           sx={{
@@ -169,22 +133,40 @@ export default function Dashboard() {
               {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
+                    sx={{
+                      p: 2,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      height: 240,
+                      borderRadius: 8,
+                      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                      transition: 'box-shadow 0.3s ease-in-out',
+                      '&:hover': {
+                        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',
+                      },
+                    }}
                 >
                   <Deposits />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
+                <Grid item xs={12}>
+                    <Paper
+                        sx={{
+                            p: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            borderRadius: 12,
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                            transition: 'box-shadow 0.3s ease-in-out',
+                            '&:hover': {
+                                boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',
+                            },
+                        }}
+                    >
+                        <Orders />
+                    </Paper>
+                </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
