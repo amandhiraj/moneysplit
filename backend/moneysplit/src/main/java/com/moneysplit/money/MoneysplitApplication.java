@@ -1,8 +1,10 @@
 package com.moneysplit.money;
 
 import com.moneysplit.money.Model.Expense;
+import com.moneysplit.money.Model.GroupExpenses;
 import com.moneysplit.money.Model.User;
 import com.moneysplit.money.Repository.ExpenseRepository;
+import com.moneysplit.money.Repository.GroupExpensesRepository;
 import com.moneysplit.money.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,12 +23,18 @@ public class MoneysplitApplication {
     }
     //uncomment to get an idea of how the entry looks like
 //    @Bean
-//    CommandLineRunner runner(ExpenseRepository expenseRepo, UserRepository userRepo){
+//    CommandLineRunner runner(ExpenseRepository expenseRepo, UserRepository userRepo, GroupExpensesRepository groupRepo){
 //        return args -> {
-//            User user = new User("Aman Dhiraj", "amandhiraj@live.com", List.of("s4dAda"), 30.0, LocalDateTime.now());
-//            Expense expense = new Expense("s4dAda","Food", 100.0, List.of(user));
+//            Map<String, Double> map = new HashMap<>();
+//            map.put("abc", 30.12);
+//            User user = new User("Aman Dhiraj", "amandhiraj@live.com", map, LocalDateTime.now());
+//            GroupExpenses groupExpenses = new GroupExpenses("Food", 100.0, List.of());
+//
+//            Expense expense = new Expense("abc", List.of(groupExpenses));
 //            expenseRepo.insert(expense);
 //            userRepo.insert(user);
+//            groupRepo.insert(groupExpenses);
+//
 //        };
 //    }
 }

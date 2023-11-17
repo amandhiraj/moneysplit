@@ -7,7 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Document
@@ -17,15 +19,13 @@ public class User {
     private String name;
     @Indexed(unique = true)
     private String email;
-    private List<String> groupID;
-    private double netAmount;
+    private Map<String, Double> groups;
     private LocalDateTime createdAt;
 
-    public User(String name, String email, List<String> groupID, double netAmount, LocalDateTime createdAt) {
+    public User(String name, String email, Map<String, Double> groups, LocalDateTime createdAt) {
         this.name = name;
         this.email = email;
-        this.groupID = groupID;
-        this.netAmount = netAmount;
+        this.groups = groups;
         this.createdAt = createdAt;
     }
 }

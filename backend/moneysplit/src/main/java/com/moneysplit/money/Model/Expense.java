@@ -13,15 +13,11 @@ public class Expense {
     @Id
     private String id;
     private String groupId;
-    @Indexed(unique = true)
-    private String name;
-    private double amount;
-    private List<User> sharedBy;
+    private List<GroupExpenses> groupExpenses;
 
-    public Expense(String groupId, String name, double amount, List<User> sharedBy) {
+    public Expense(String groupId, List<GroupExpenses> groupExpenses) {
         this.groupId = groupId;
-        this.name = name;
-        this.amount = amount;
-        this.sharedBy = sharedBy;
+        this.groupExpenses = groupExpenses;
     }
+
 }
