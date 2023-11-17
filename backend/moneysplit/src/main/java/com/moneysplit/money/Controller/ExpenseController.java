@@ -3,9 +3,10 @@ package com.moneysplit.money.Controller;
 import com.moneysplit.money.Model.Expense;
 import com.moneysplit.money.Service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 
@@ -20,8 +21,9 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
-    @GetMapping
-    public List<Expense> getExpenses() {
-        return expenseService.getExpenses();
+    @GetMapping("/{groupId}")
+    public ResponseEntity<?> getExpensesByGroupId(@PathVariable String groupId) {
+        Expense expenses = expenseService.getExpensesByGroupId(groupId);
+        return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
 }

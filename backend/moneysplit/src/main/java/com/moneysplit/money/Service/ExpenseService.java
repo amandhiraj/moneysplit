@@ -5,6 +5,8 @@ import com.moneysplit.money.Repository.ExpenseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,6 +16,11 @@ public class ExpenseService {
     @GetMapping
     public List<Expense> getExpenses() {
         return expenseRepository.findAll();
+    }
+
+    @GetMapping
+    public Expense getExpensesByGroupId(String groupId) {
+        return expenseRepository.findExpenseByGroupId(groupId);
     }
 
 }
