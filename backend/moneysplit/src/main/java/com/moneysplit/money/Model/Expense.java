@@ -13,11 +13,12 @@ public class Expense {
     @Id
     private String id;
     private String groupId;
-    private List<GroupExpenses> groupExpenses;
+    private String name;
+    private double amount;
 
-    public Expense(String groupId, List<GroupExpenses> groupExpenses) {
+    public Expense(String groupId, String name, double amount) {
         this.groupId = groupId;
-        this.groupExpenses = groupExpenses;
+        this.name = name;
+        this.amount = amount;
     }
-
 }
