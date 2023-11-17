@@ -22,6 +22,7 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import NavigationBar from './NavigationBar';
 import logoImage from './logo_nb.png';
+import MembersForm from "./MembersForm";
 
 function Copyright(props: any) {
   return (
@@ -118,10 +119,11 @@ export default function Dashboard() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: "white",
+          //(theme) =>
+            //   theme.palette.mode === 'light'
+            //     ? theme.palette.grey[100]
+            //     : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -131,42 +133,25 @@ export default function Dashboard() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 240,
-                      borderRadius: 8,
-                      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                      transition: 'box-shadow 0.3s ease-in-out',
-                      '&:hover': {
-                        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',
-                      },
-                    }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-                <Grid item xs={12}>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            borderRadius: 12,
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                            transition: 'box-shadow 0.3s ease-in-out',
-                            '&:hover': {
-                                boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',
-                            },
-                        }}
-                    >
-                        <Orders />
-                    </Paper>
-                </Grid>
+                <MembersForm />
+              {/*/!* Recent Orders *!/*/}
+              {/*  <Grid item xs={12}>*/}
+              {/*      <Paper*/}
+              {/*          sx={{*/}
+              {/*              p: 2,*/}
+              {/*              display: 'flex',*/}
+              {/*              flexDirection: 'column',*/}
+              {/*              borderRadius: 12,*/}
+              {/*              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',*/}
+              {/*              transition: 'box-shadow 0.3s ease-in-out',*/}
+              {/*              '&:hover': {*/}
+              {/*                  boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',*/}
+              {/*              },*/}
+              {/*          }}*/}
+              {/*      >*/}
+              {/*          <Orders />*/}
+              {/*      </Paper>*/}
+              {/*  </Grid>*/}
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
