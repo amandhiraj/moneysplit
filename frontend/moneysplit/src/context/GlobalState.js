@@ -3,13 +3,15 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-  transactions: [],
-  membersList : [
-    { id: 1, name: 'Aman', balance: 0 },
-    { id: 2, name: 'Vamsi', balance: 0 },
-    { id: 3, name: 'Pranav', balance: 0},
-    // Add more members as needed
-  ]
+  expense: {
+    name: "Dr Trip",
+    groupID: 0,
+    membersList: [
+      { id: 1, name: 'Aman', balance: 0, transactions: [] },
+      { id: 2, name: 'Vamsi', balance: 0, transactions: [] },
+      { id: 3, name: 'Pranav', balance: 0, transactions: [] }]
+  },
+  memberID: 1
 }
 
 // Create context
@@ -20,36 +22,36 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
-  function deleteTransaction(id) {
+  function deleteExpense(id) {
     dispatch({
-      type: 'DELETE_TRANSACTION',
+      type: 'DELETE_EXPENSE',
       payload: id
     });
   }
 
-  function addTransaction(transaction) {
+  function addExpense(expense) {
     dispatch({
-      type: 'ADD_TRANSACTION',
-      payload: transaction
+      type: 'ADD_EXPENSE',
+      payload: expense
     });
   }
 
-  function modifyTranscation(transaction) {
+  function changeMemberID(id) {
     dispatch({
-      type: 'MODIFY_TRANSACTION',
-      payload: transaction
+      type: 'MODIFY_EDITOR',
+      payload: id
     });
-    
+
   }
 
 
   return (<GlobalContext.Provider value={{
-    transactions: state.transactions,
-    membersList: state.membersList,
-    deleteTransaction,
-    addTransaction,
-    modifyTranscation,
-  
+    expense: state.expense,
+    memberID: state.memberID,
+    deleteExpense,
+    addExpense,
+    changeMemberID
+
   }}>
     {children}
   </GlobalContext.Provider>);

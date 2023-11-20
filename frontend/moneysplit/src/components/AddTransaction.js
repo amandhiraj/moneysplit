@@ -7,27 +7,31 @@ export const AddTransaction = () => {
   const [sharedBy, setSharedBy] = useState([]); // State to hold shared by members
 
   // Get members from context or other source
-  const { membersList } = useContext(GlobalContext)
-  const { addTransaction } = useContext(GlobalContext);
+  const { expense } = useContext(GlobalContext)
+  const { addExpense } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const newTransaction = {
+    const newExpense = {
       id: Math.floor(Math.random() * 100000000),
       text,
       amount: +amount,
       sharedBy: sharedBy.map((memberId) => Number(memberId)), // Convert IDs to numbers
     };
 
-    addTransaction(newTransaction);
+    addExpense(newExpense);
   };
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
 
     if (checked) {
-      setSharedBy([...sharedBy, value]); // Add selected member ID to sharedBy
+      // If checkbox is checked, add the selected member ID to sharedBy
+      setSharedBy([...sharedBy, value]);
+    } else {
+      // If checkbox is unchecked, remove the selected member ID from sharedBy
+      setSharedBy(sharedBy.filter((id) => id !== value));
     }
   };
 
@@ -55,7 +59,7 @@ export const AddTransaction = () => {
         </div>
         <div className="form-control">
           <label>Shared By:</label>
-          {membersList.map((member) => (
+          {expense.membersList.map((member) => (
             <div key={member.id}>
               <label>
                 <input
