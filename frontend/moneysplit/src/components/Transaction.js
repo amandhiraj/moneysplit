@@ -1,0 +1,49 @@
+import React, { useState, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
+import { MemberSelectionModal } from '../components/MemberSelectionModel'; // Import the modal component
+
+export const Transaction = ({ transaction }) => {
+  const { deleteTransaction, membersList, modifyTransaction } = useContext(GlobalContext);
+
+  const [showMembersPopup, setShowMembersPopup] = useState(false);
+  const [selectedMembers, setSelectedMembers] = useState(transaction.sharedBy);
+
+  // Function to toggle the display of the members modal
+  const toggleMembersPopup = () => {
+    setShowMembersPopup(!showMembersPopup);
+  };
+
+  // Function to handle member selection
+  const handleMemberSelection = (memberId) => {
+    if (selectedMembers.includes(memberId)) {
+      setSelectedMembers(selectedMembers.filter((id) => id !== memberId));
+    } else {
+      setSelectedMembers([...selectedMembers, memberId]);
+    }
+  };
+
+  return (
+    <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
+      {transaction.text} <span>{'+$' + transaction.amount}</span>
+      <button onClick={() => deleteTransaction(transaction.id)} className="delete-btn">x</button>
+      {/* Add the group of people icon here */}
+      <span className="group-icon" onClick={toggleMembersPopup}>
+        🧑‍🤝‍🧑
+      </span>
+
+      {/* Render the modal conditionally */}
+      {showMembersPopup && (
+        <MemberSelectionModal
+          membersList={membersList}
+          selectedMembers={selectedMembers}
+          handleMemberSelection={handleMemberSelection}
+          toggleMembersPopup={toggleMembersPopup}
+          onSave={() => {
+            toggleMembersPopup();
+            transaction.sharedBy = selectedMembers;
+          }}
+        />
+      )}
+    </li>
+  );
+};
