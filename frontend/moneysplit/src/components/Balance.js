@@ -19,7 +19,8 @@ function moneyFormatter(num) {
 
 export const Balance = () => {
   const { expense, setUserBalance, memberID } = useContext(GlobalContext);
-  const amounts = expense.membersList.find((mem) => mem.id === Number(memberID)).transactions.map(transaction => transaction.amount);
+  //console.log("Member ID: " + memberID + " Name" + expense.membersList.find((mem) => mem.id === memberID).name);
+  const amounts = expense.membersList.find((mem) => mem.id === memberID).transactions.map(transaction => transaction.amount);
   const total = amounts.reduce((acc, item) => (acc += item), 0);
   return (
     <>

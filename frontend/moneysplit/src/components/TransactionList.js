@@ -5,10 +5,10 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const TransactionList = () => {
   const { expense,memberID } = useContext(GlobalContext);
-  const trans = expense.membersList.find((mem) => mem.id === Number(memberID)).transactions;
+  const trans = expense.membersList.find((mem) => mem.id === memberID).transactions;
   return (
     <>
-      <h3>History</h3>
+      <h3>Item History</h3>
       <ul className="list">
         {trans.map(T => (<Transaction key={T.id} transaction={T} />))}
       </ul>

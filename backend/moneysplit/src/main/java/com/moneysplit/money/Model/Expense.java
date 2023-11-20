@@ -12,13 +12,14 @@ import java.util.*;
 public class Expense {
     @Id
     private String id;
+    @Indexed(unique = true)
     private String groupId;
     private String name;
-    private double amount;
+    private List<User> membersList;
 
-    public Expense(String groupId, String name, double amount) {
+    public Expense(String groupId, String name, List<User> membersList) {
         this.groupId = groupId;
         this.name = name;
-        this.amount = amount;
+        this.membersList = membersList;
     }
 }
