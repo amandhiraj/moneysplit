@@ -296,3 +296,102 @@ input[type='number'] {
 .save-button:hover {
     background-color: #28a745;
 }
+
+/* Common styles that apply to all screen sizes */
+/* ... (other existing styles) */
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    .main-container {
+        width: 90%; /* Adjust width for smaller devices */
+    }
+
+    .members-container {
+        margin: 30px auto;
+        position: static; /* Remove fixed positioning for smaller screens */
+    }
+
+    .member-card {
+        width: 100%; /* Ensure member cards take full width on smaller screens */
+    }
+
+    /* Adjust styles for modal overlay and members modal */
+    .modal-overlay {
+        align-items: flex-start;
+    }
+
+    .members-modal {
+        max-width: 90%; /* Adjust maximum width for smaller screens */
+    }
+}
+
+/* Media query for even smaller screens (e.g., smartphones) */
+@media (max-width: 480px) {
+    .main-container {
+        width: 95%; /* Further reduce width for smaller screens */
+    }
+
+    .inc-exp-container,
+    .members-container {
+        padding: 15px; /* Decrease padding for smaller screens */
+    }
+
+    .btn {
+        margin-bottom: 20px; /* Increase bottom margin for buttons */
+    }
+
+    .list li {
+        margin: 5px 0; /* Reduce margin for list items */
+        padding: 8px; /* Decrease padding for list items */
+    }
+
+    .delete-btn {
+        font-size: 18px; /* Reduce font size of delete button */
+    }
+
+    .members-container {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .member-card {
+        padding: 10px; /* Adjust padding for member cards */
+    }
+
+    .modal-overlay {
+        justify-content: flex-start; /* Adjust alignment for modal overlay */
+    }
+
+    .members-modal {
+        padding: 15px; /* Adjust padding for members modal */
+    }
+
+    .save-button {
+        margin-top: 15px; /* Adjust margin for save button */
+    }
+}
+
+/* Common styles that apply to all screen sizes */
+/* ... (other existing styles) */
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    /* Adjusting ShareBox width for smaller screens */
+    .MuiBox-root {
+        width: 90%;
+        max-width: 400px; /* Adjust the maximum width as needed */
+    }
+}
+
+/* Media query for phone view */
+@media (max-width: 480px) {
+    /* Adjusting ShareBox for phone view */
+    .MuiBox-root {
+        width: 100%;
+        max-width: unset; /* Reset maximum width for smaller screens */
+        right: 0;
+        left: 0;
+        border-left: 0; /* Remove border for a cleaner look */
+        border-top: 1px solid #ccc; /* Add a border at the top for separation */
+        border-bottom: none; /* Remove border at the bottom */
+    }
+}

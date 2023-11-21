@@ -1,14 +1,14 @@
 // MemberList.js
 
 import React, { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 
 const MemberList = () => {
 
     const { expense, changeMemberID,memberID } = useContext(GlobalContext);
     const handleMemberClick = (memberId) => {
         // Handle the click for the member with the given ID
-        console.log(`Clicked member with ID ${memberId}`);
+        console.log(`Clicked member with ID ${expense}`);
         changeMemberID(memberId)
         // Perform any other actions based on the click
     };

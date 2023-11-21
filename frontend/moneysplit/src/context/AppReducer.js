@@ -30,7 +30,7 @@ export default (state, action) => {
       }
     case 'FETCH_SUCCESS':
       const memID = action.payload.membersList[0].id;
-      console.log("payload called with id: " + memID + " Data: " + action.payload)
+      //console.log("payload called with id: " + memID + " Data: " + action.payload)
       return {
         ...state,
         expense: action.payload,

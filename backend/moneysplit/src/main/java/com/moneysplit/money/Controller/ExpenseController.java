@@ -23,7 +23,7 @@ public class ExpenseController {
     public ExpenseController(ExpenseService expenseService) {
         this.expenseService = expenseService;
     }
-
+    @CrossOrigin
     @GetMapping("/{groupId}")
     public ResponseEntity<?> getExpensesByGroupId(@PathVariable String groupId) {
         return expenseService.getExpensesByGroupId(groupId);

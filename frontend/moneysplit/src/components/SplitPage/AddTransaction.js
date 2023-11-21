@@ -1,15 +1,29 @@
-import React, { useState, useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import React, { useState, useContext, useEffect } from 'react';
+import { GlobalContext } from '../../context/GlobalState';
 import { Alert, AlertTitle } from '@mui/material';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
   const [sharedBy, setSharedBy] = useState([]);
-  const [error, setError] = useState(null); // State to handle error message
+  const [error, setError] = useState(null);
+  const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
 
   const { expense, updateDatabase } = useContext(GlobalContext);
   const { addExpense } = useContext(GlobalContext);
+
+  // Effect to track changes in inputs
+  useEffect(() => {
+    const handleChanges = () => {
+      setUnsavedChanges(true);
+    };
+
+    document.addEventListener('input', handleChanges);
+
+    return () => {
+      document.removeEventListener('input', handleChanges);
+    };
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +45,7 @@ export const AddTransaction = () => {
     setAmount(0);
     setSharedBy([]);
     setError(null);
+    setUnsavedChanges(false); // Reset unsaved changes after submission
   };
 
   const handleCheckboxChange = (event) => {
@@ -41,34 +56,38 @@ export const AddTransaction = () => {
     } else {
       setSharedBy(sharedBy.filter((id) => id !== value));
     }
+
+    setUnsavedChanges(true); // Set unsaved changes when checkboxes change
   };
+
   const handleSaveAndCalculate = async () => {
     console.log("insinde handele")
     const urlGroupID = expense.groupID
-
-
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/expenses/update/${urlGroupID}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-          // Add other headers if needed
-        },
-        body: JSON.stringify(expense) // Replace yourDataObject with the actual data you want to send
-      });
+        const response = await fetch(`http://localhost:8080/api/v1/expenses/update/${urlGroupID}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // Add other headers if needed
+          },
+          body: JSON.stringify(expense) // Replace yourDataObject with the actual data you want to send
+        });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
 
-      const data = await response.json();
-      console.log('POST request successful:', data);
+        const data = await response.json();
+        console.log('POST request successful:', data);
       // Handle the response data here
     } catch (error) {
-      console.error('There was a problem with the POST request:', error);
+        console.error('There was a problem with the POST request:', error);
       // Handle error, show error message, etc.
     }
+    // Logic for saving changes
+    setUnsavedChanges(false); // Reset unsaved changes after saving
   };
+
   return (
       <>
         <form onSubmit={onSubmit}>
@@ -116,7 +135,17 @@ export const AddTransaction = () => {
           )}
           <button className="btn">Add transaction</button>
         </form>
-        <button className="btn" onClick={handleSaveAndCalculate}>Save and Calculate</button>
+        <button className="btn" onClick={handleSaveAndCalculate}>
+          Save and Calculate
+        </button>
+
+        {/* Alert for unsaved changes */}
+        {unsavedChanges && (
+            <Alert severity="warning">
+              <AlertTitle>Unsaved Changes</AlertTitle>
+              There are unsaved changes. Please save before leaving.
+            </Alert>
+        )}
       </>
   );
 };

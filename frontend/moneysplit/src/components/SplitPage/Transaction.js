@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { GlobalContext } from '../context/GlobalState';
-import { MemberSelectionModal } from '../components/MemberSelectionModel'; // Import the modal component
+import { GlobalContext } from '../../context/GlobalState';
+import { MemberSelectionModal } from './MemberSelectionModel'; // Import the modal component
 
 export const Transaction = ({ transaction }) => {
   const { deleteExpense, expense } = useContext(GlobalContext);

@@ -21,31 +21,6 @@ export const GlobalContext = createContext(initialState);
 // Provider component
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
-  const [error, setError] = useState(null);
-
-  const path = window.location.pathname;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/v1/expenses${path}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok.');
-        }
-
-        const data = await response.json();
-        console.log(data)
-        // Dispatch an action to update the state with fetched data
-        dispatch({ type: 'FETCH_SUCCESS', payload: data});
-      } catch (error) {
-        //console.error('There was a problem fetching the data:', error);
-        setError(error);
-        // Handle error, show error message, etc.
-      }
-    };
-
-    fetchData(); // Call the function to fetch the data on component mount
-  }, []);
   // Actions
   function deleteExpense(id) {
     dispatch({
@@ -68,9 +43,12 @@ export const GlobalProvider = ({ children }) => {
     });
 
   }
+  function updateExpenseData(expense) {
+    dispatch({
+      type: 'FETCH_SUCCESS',
+      payload: expense
+    });
 
-  if (error) {
-    return <NotFoundPage />; // Render the 404 page if there's an error
   }
 
   return (<GlobalContext.Provider value={{
@@ -79,7 +57,7 @@ export const GlobalProvider = ({ children }) => {
     deleteExpense,
     addExpense,
     changeMemberID,
-
+    updateExpenseData
   }}>
     {children}
   </GlobalContext.Provider>);
