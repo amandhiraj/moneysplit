@@ -1,5 +1,6 @@
 package com.moneysplit.money.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,14 +12,14 @@ import java.util.List;
 public class Transactions {
 
     private String id;
-    private String itemName;
+    private String text;
     private double amount;
-    private List<User> sharedBy;
+    private List<String> sharedBy;
 
 
-    public Transactions(String id, String itemName, double amount, List<User> sharedBy) {
+    public Transactions(String id, String text, double amount, List<String> sharedBy) {
         this.id = id;
-        this.itemName = itemName;
+        this.text = text;
         this.amount = amount;
         this.sharedBy = sharedBy;
     }

@@ -4,13 +4,14 @@ import { Balance } from './Balance';
 import { TransactionList } from './TransactionList';
 import { AddTransaction } from './AddTransaction';
 import { MemberList } from './MemberList';
-import { GlobalContext, GlobalProvider } from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 import { AppBar, Toolbar } from '@mui/material';
 import logo from '../logo.png';
 import '../../App.css';
 import { useParams } from 'react-router-dom';
 import { NotFoundPage } from '../NotFoundPage';
-import {ShareBox} from "./ShareBox";
+import { ShareBox } from "./ShareBox";
+import { useNavigate } from 'react-router-dom';
 
 function SplitHomePage() {
     const [error, setError] = useState(null);
@@ -18,6 +19,7 @@ function SplitHomePage() {
     const { updateExpenseData } = useContext(GlobalContext);
     const [isLoading, setIsLoading] = useState(true);
     const [isNotFound, setIsNotFound] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,8 +33,8 @@ function SplitHomePage() {
                     updateExpenseData(dataApi);
                 }
             } catch (error) {
-                setError(error);
-                // Handle error, show error message, etc.
+                navigate('/server-down');
+                setError('Failed to fetch data. Please try again later.'); // Set error message
             } finally {
                 setIsLoading(false); // Set loading to false when data fetching is completed
             }
@@ -49,22 +51,25 @@ function SplitHomePage() {
         return <NotFoundPage />;
     }
 
+    if (error) {
+        return <div>Error: {error}</div>; // Render an error message if an error occurred
+    }
+
     return (
         <>
-            <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none', top: 30, left: 0, right: 0 }}>
+            <AppBar position="fixed" style={{ background: '#f7f7f7', boxShadow: 'none', top: 0, left: 0, right: 0 }}>
                 <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
                     <img src={logo} alt="Logo" style={{ height: 40 }} />
                 </Toolbar>
             </AppBar>
-            <div className="container">
-                <MemberList />
-            </div>
-            <Header />
             <div className="main-container">
+                <MemberList />
+                <Header />
+                <br/>
                 <Balance />
                 <TransactionList />
                 <AddTransaction />
-                <ShareBox/>
+                <ShareBox />
             </div>
         </>
     );

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
-import { MemberSelectionModal } from './MemberSelectionModel'; // Import the modal component
+import { MemberSelectionModal } from './MemberSelectionModel';
+import {margin} from "@mui/system"; // Import the modal component
 
 export const Transaction = ({ transaction }) => {
   const { deleteExpense, expense } = useContext(GlobalContext);
@@ -23,12 +24,11 @@ export const Transaction = ({ transaction }) => {
 
   return (
     <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
-      {transaction.text} <span>{'+$' + transaction.amount}</span>
+      {transaction.text} <span>{'+$' + transaction.amount}   <span className="group-icon" onClick={toggleMembersPopup}>
+      <button> 🧑‍🤝‍🧑</button>
+      </span></span>
       <button onClick={() => deleteExpense(transaction.id)} className="delete-btn">x</button>
       {/* Add the group of people icon here */}
-      <span className="group-icon" onClick={toggleMembersPopup}>
-        🧑‍🤝‍🧑
-      </span>
 
       {/* Render the modal conditionally */}
       {showMembersPopup && (

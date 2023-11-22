@@ -30,9 +30,8 @@ public class ExpenseController {
     }
 
     @PostMapping("update/{groupId}")
-    public ResponseEntity<?> updateExpenseByGroupId(@PathVariable String groupId, @RequestBody String payload) throws JSONException {
-        JSONObject jsonExpense = new JSONObject(payload);
-        Expense expenses = expenseService.updateExpensesByGroupId(groupId, jsonExpense);
-        return new ResponseEntity<>(expenses, HttpStatus.OK);
+    public ResponseEntity<?> updateExpenseByGroupId(@PathVariable String groupId, @RequestBody Expense updatedExpense) {
+        //System.out.println("Updating hit");
+        return expenseService.updateExpensesByGroupId(groupId, updatedExpense);
     }
 }

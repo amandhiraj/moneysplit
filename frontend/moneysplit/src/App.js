@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { NotFoundPage } from './components/NotFoundPage';
 import {SplitHomePage} from "./components/SplitPage/SplitHomePage";
+import {ServerDownPage} from "./components/ServerDownPage";
+import {ServerMismatch} from "./components/ServerMismatch";
 
 function App() {
     return (
@@ -16,6 +18,9 @@ function App() {
                             <SplitHomePage/>
                         }
                     />
+                    {/* Add route for ServerDownPage */}
+                    <Route exact path="/server-down" element={<ServerDownPage/>} />
+                    <Route exact path="/outdated" element={<ServerMismatch/>} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>

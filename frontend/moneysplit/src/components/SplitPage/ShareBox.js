@@ -25,7 +25,7 @@ const ShareBox = () => {
 
     return (
         <Box
-            position="fixed"
+            className={"share-box"}
             bottom={0}
             right={0}
             p={2}
