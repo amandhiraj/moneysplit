@@ -3,12 +3,11 @@ import { GlobalContext } from '../../context/GlobalState';
 import { Alert, AlertTitle } from '@mui/material';
 import {useNavigate, useParams} from "react-router-dom";
 
-export const AddTransaction = () => {
+export const AddTransaction = ({setUnsavedChanges, unsavedChanges}) => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState('');
   const [sharedBy, setSharedBy] = useState([]);
   const [error, setError] = useState(null);
-  const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
   const { splitId } = useParams(); // Access splitId from the route parameters
   const { expense, updateDatabase } = useContext(GlobalContext);
   const { addExpense } = useContext(GlobalContext);
@@ -143,11 +142,11 @@ export const AddTransaction = () => {
           )}
           <button className="btn">Add transaction</button>
         </form>
-        {unsavedChanges && (
-            <button className="btn" onClick={handleSaveAndCalculate}>
-              Save and Calculate
-            </button>
-        )}
+
+          <button className="btn" onClick={handleSaveAndCalculate}>
+            Save and Calculate
+          </button>
+
       </>
   );
 };

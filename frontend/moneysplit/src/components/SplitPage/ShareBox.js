@@ -10,7 +10,7 @@ const ShareBox = () => {
 
     useEffect(() => {
         if (expense && expense.groupId) {
-            setShareLink(`https://localhost:8080/split/${expense.groupId}`);
+            setShareLink(`http://localhost:3000/split/${expense.groupId}`);
         }
     }, [expense]);
 

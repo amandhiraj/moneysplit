@@ -5,21 +5,24 @@ import { TransactionList } from './TransactionList';
 import { AddTransaction } from './AddTransaction';
 import { MemberList } from './MemberList';
 import { GlobalContext } from '../../context/GlobalState';
-import { AppBar, Toolbar } from '@mui/material';
+import {Alert, AlertTitle, AppBar, Toolbar} from '@mui/material';
 import logo from '../logo.png';
 import '../../App.css';
 import { useParams } from 'react-router-dom';
 import { NotFoundPage } from '../NotFoundPage';
 import { ShareBox } from "./ShareBox";
 import { useNavigate } from 'react-router-dom';
+import {SettledPage} from "./SettledPage";
 
 function SplitHomePage() {
     const [error, setError] = useState(null);
     const { splitId } = useParams(); // Access splitId from the route parameters
-    const { updateExpenseData } = useContext(GlobalContext);
+    const { updateExpenseData, expense } = useContext(GlobalContext);
     const [isLoading, setIsLoading] = useState(true);
     const [isNotFound, setIsNotFound] = useState(false);
     const navigate = useNavigate();
+    const [hasSettledTransactions, setSettledTransactions] = useState(expense && expense.membersList.length > 1);
+    const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,13 +66,21 @@ function SplitHomePage() {
                 </Toolbar>
             </AppBar>
             <div className="main-container">
-                <MemberList />
-                <Header />
-                <br/>
-                <Balance />
-                <TransactionList />
-                <AddTransaction />
-                <ShareBox />
+                {hasSettledTransactions ? (
+                    <SettledPage
+                        hasSettledTransactions={hasSettledTransactions}
+                        setSettledTransactions={setSettledTransactions} />
+                ) : (
+                    <>
+                        <MemberList />
+                        <Header />
+                        <br/>
+                        <Balance />
+                        <TransactionList setUnsavedChanges={setUnsavedChanges} />
+                        <AddTransaction unsavedChanges={unsavedChanges} setUnsavedChanges={setUnsavedChanges}/>
+                        <ShareBox />
+                    </>
+                )}
             </div>
         </>
     );

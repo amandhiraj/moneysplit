@@ -29,9 +29,9 @@ public class ExpenseController {
         return expenseService.getExpensesByGroupId(groupId);
     }
 
-    @PostMapping("update/{groupId}")
+    @PostMapping(value = "update/{groupId}", consumes = "application/json")
     public ResponseEntity<?> updateExpenseByGroupId(@PathVariable String groupId, @RequestBody Expense updatedExpense) {
-        //System.out.println("Updating hit");
+        System.out.println("Updating hit");
         return expenseService.updateExpensesByGroupId(groupId, updatedExpense);
     }
 }

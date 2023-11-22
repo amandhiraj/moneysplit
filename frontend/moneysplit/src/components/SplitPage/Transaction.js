@@ -3,7 +3,7 @@ import { GlobalContext } from '../../context/GlobalState';
 import { MemberSelectionModal } from './MemberSelectionModel';
 import {margin} from "@mui/system"; // Import the modal component
 
-export const Transaction = ({ transaction }) => {
+export const Transaction = ({ transaction, setUnsavedChanges }) => {
   const { deleteExpense, expense } = useContext(GlobalContext);
   const [showMembersPopup, setShowMembersPopup] = useState(false);
   const [selectedMembers, setSelectedMembers] = useState(transaction.sharedBy);
@@ -22,12 +22,17 @@ export const Transaction = ({ transaction }) => {
     }
   };
 
+  const handleDelete = () => {
+    deleteExpense(transaction.id)
+    setUnsavedChanges(true)
+  }
+
   return (
     <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
       {transaction.text} <span>{'+$' + transaction.amount}   <span className="group-icon" onClick={toggleMembersPopup}>
       <button> 🧑‍🤝‍🧑</button>
       </span></span>
-      <button onClick={() => deleteExpense(transaction.id)} className="delete-btn">x</button>
+      <button onClick={handleDelete} className="delete-btn">x</button>
       {/* Add the group of people icon here */}
 
       {/* Render the modal conditionally */}
