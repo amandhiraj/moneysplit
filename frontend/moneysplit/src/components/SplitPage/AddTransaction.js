@@ -1,17 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 import { Alert, AlertTitle } from '@mui/material';
+import {useNavigate, useParams} from "react-router-dom";
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [sharedBy, setSharedBy] = useState([]);
   const [error, setError] = useState(null);
   const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
-
+  const { splitId } = useParams(); // Access splitId from the route parameters
   const { expense, updateDatabase } = useContext(GlobalContext);
   const { addExpense } = useContext(GlobalContext);
-
+  const navigate = useNavigate();
   // Effect to track changes in inputs
   useEffect(() => {
     const handleChanges = () => {
@@ -42,10 +43,9 @@ export const AddTransaction = () => {
 
     addExpense(newExpense);
     setText('');
-    setAmount(0);
+    setAmount('');
     setSharedBy([]);
     setError(null);
-    setUnsavedChanges(false); // Reset unsaved changes after submission
   };
 
   const handleCheckboxChange = (event) => {
@@ -61,10 +61,8 @@ export const AddTransaction = () => {
   };
 
   const handleSaveAndCalculate = async () => {
-    console.log("insinde handele")
-    const urlGroupID = expense.groupID
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/expenses/update/${urlGroupID}`, {
+        const response = await fetch(`http://localhost:8080/api/v1/expenses/update/${splitId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -72,13 +70,15 @@ export const AddTransaction = () => {
           },
           body: JSON.stringify(expense) // Replace yourDataObject with the actual data you want to send
         });
-
         if (!response.ok) {
+          setError("You are outdated with the server please reload this page and re-add the stuff!");
+          //navigate("/outdated")
           throw new Error('Network response was not ok.');
         }
 
         const data = await response.json();
         console.log('POST request successful:', data);
+        window.location.reload();
       // Handle the response data here
     } catch (error) {
         console.error('There was a problem with the POST request:', error);
@@ -89,7 +89,15 @@ export const AddTransaction = () => {
   };
 
   return (
+
       <>
+        {/* Alert for unsaved changes */}
+        {unsavedChanges && !error && (
+            <Alert severity="warning">
+              <AlertTitle>Unsaved Changes</AlertTitle>
+              There are unsaved changes. Please save before leaving.
+            </Alert>
+        )}
         <form onSubmit={onSubmit}>
           <div className="form-control">
             <label htmlFor="text">Item Name</label>
@@ -135,16 +143,10 @@ export const AddTransaction = () => {
           )}
           <button className="btn">Add transaction</button>
         </form>
-        <button className="btn" onClick={handleSaveAndCalculate}>
-          Save and Calculate
-        </button>
-
-        {/* Alert for unsaved changes */}
         {unsavedChanges && (
-            <Alert severity="warning">
-              <AlertTitle>Unsaved Changes</AlertTitle>
-              There are unsaved changes. Please save before leaving.
-            </Alert>
+            <button className="btn" onClick={handleSaveAndCalculate}>
+              Save and Calculate
+            </button>
         )}
       </>
   );
