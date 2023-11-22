@@ -6,10 +6,12 @@ import {NotFoundPage} from "../components/NotFoundPage";
 const initialState = {
   expense: {
     name: "Example",
-    groupID: 0,
+    groupId: 0,
     membersList: [
       { id: 1, name: 'Bob', balance: 0, transactions: [] },
-      { id: 2, name: 'Charle', balance: 0, transactions: [] }]
+      { id: 2, name: 'Charle', balance: 0, transactions: [] }],
+    settledTransactions: [],
+    revisionVersion: ''
 
   },
   memberID: 1

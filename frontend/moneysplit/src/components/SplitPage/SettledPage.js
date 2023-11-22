@@ -6,8 +6,8 @@ const SettledPage = ({ hasSettledTransactions, setSettledTransactions }) => {
     const { expense } = useContext(GlobalContext);
     const navigate = useNavigate();
     function handleViewAndEdit(){
-        setSettledTransactions(!hasSettledTransactions);
         navigate(`/split/${expense.groupId}`);
+        setSettledTransactions(false);
     }
     return (
         <Grid container spacing={2} justifyContent="center">
@@ -26,35 +26,44 @@ const SettledPage = ({ hasSettledTransactions, setSettledTransactions }) => {
             >
                 {expense.name} Settlement
             </Paper>
-            {expense.settledTransactions && expense.settledTransactions.map((transaction, index) => (
-                <Grid item xs={12} key={index}>
-                    <Paper style={{
-                        padding: '10px',
-                        backgroundColor: '#d9f6e5',
-                        borderLeft: '4px solid #2ecc71',
-                        marginBottom: '10px',
-                    }}>
-                        <Typography variant="h6" style={{ color: '#333', marginBottom: '5px' }}>
-                            {transaction.giver} owes {transaction.receiver}
-
-                            <Paper
-                            elevation={0}
-                            tabIndex={0}
-                            component="div"
-                            style={{
+            {hasSettledTransactions === false ? (
+                <div>
+                    <h2 style={{alignContent: 'center'}}>No settled transactions to display.</h2>
+                    {/* Additional content or components */}
+                </div>
+            ) : (
+                <>
+                    {expense.settledTransactions.map((transaction, index) => (
+                        <Grid item xs={12} key={index}>
+                            <Paper style={{
                                 padding: '10px',
-                                cursor: 'pointer',
-                                backgroundColor: 'rgba(16,20,24,0.18)'
-                            }}
-                        >
-                            ${transaction.value}
+                                backgroundColor: '#d9f6e5',
+                                borderLeft: '4px solid #2ecc71',
+                                marginBottom: '10px',
+                            }}>
+                                <Typography variant="h6" style={{ color: '#333', marginBottom: '5px' }}>
+                                    {transaction.giver} owes {transaction.receiver}
 
-                        </Paper>
-                        </Typography>
-                    </Paper>
-                </Grid>
+                                    <Paper
+                                        elevation={0}
+                                        tabIndex={0}
+                                        component="div"
+                                        style={{
+                                            padding: '10px',
+                                            cursor: 'pointer',
+                                            backgroundColor: 'rgba(16,20,24,0.18)'
+                                        }}
+                                    >
+                                        ${transaction.value}
 
-            ))}
+                                    </Paper>
+                                </Typography>
+                            </Paper>
+                        </Grid>
+
+                    ))}
+                </>
+            )}
             <Button variant="outlined" color="error" onClick={handleViewAndEdit}>
                 View/Edit Expense
             </Button>

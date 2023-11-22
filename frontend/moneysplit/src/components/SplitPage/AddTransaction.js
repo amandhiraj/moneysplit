@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
-import { Alert, AlertTitle } from '@mui/material';
+import { Alert, AlertTitle, Button, Card, CardContent, Autocomplete } from '@mui/material';
+
 import {useNavigate, useParams} from "react-router-dom";
 
 export const AddTransaction = ({setUnsavedChanges, unsavedChanges}) => {
@@ -88,66 +89,66 @@ export const AddTransaction = ({setUnsavedChanges, unsavedChanges}) => {
   };
 
   return (
-
-      <>
-        {/* Alert for unsaved changes */}
-        {unsavedChanges && !error && (
-            <Alert severity="warning">
-              <AlertTitle>Unsaved Changes</AlertTitle>
-              There are unsaved changes. Please save before leaving.
-            </Alert>
-        )}
-        <form onSubmit={onSubmit}>
-          <div className="form-control">
-            <label htmlFor="text">Item Name</label>
-            <input
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Enter Item. eg. (Food)"
-                required
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="amount">Item Cost</label>
-            <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                placeholder="Enter the cost amount..."
-                required
-            />
-          </div>
-          <div className="form-control">
-            <label>Shared By:</label>
-            {expense.membersList.map((member) => (
-                <div key={member.id}>
-                  <label>
-                    <input
-                        type="checkbox"
-                        value={member.id}
-                        checked={sharedBy.includes(member.id)}
-                        onChange={handleCheckboxChange}
-                    />
-                    {member.name}
-                  </label>
-                </div>
-            ))}
-          </div>
+      <Card variant="outlined">
+        <CardContent>
+          {unsavedChanges && !error && (
+              <Alert severity="warning">
+                <AlertTitle>Unsaved Changes</AlertTitle>
+                There are unsaved changes. Please save before leaving.
+              </Alert>
+          )}
+          <form onSubmit={onSubmit}>
+            <div className="form-control">
+              <label htmlFor="text">Item Name</label>
+              <input
+                  type="text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="Enter Item. eg. (Food)"
+                  required
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="amount">Item Cost</label>
+              <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="Enter the cost amount..."
+                  required
+              />
+            </div>
+            <div className="form-control">
+              <label>Shared By:</label>
+              {expense.membersList.map((member) => (
+                  <div key={member.id}>
+                    <label>
+                      <input
+                          type="checkbox"
+                          value={member.id}
+                          checked={sharedBy.includes(member.id)}
+                          onChange={handleCheckboxChange}
+                      />
+                      {member.name}
+                    </label>
+                  </div>
+              ))}
+            </div>
+            <button className="btn">Add transaction</button>
+          </form>
           {error && (
               <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
                 {error}
               </Alert>
           )}
-          <button className="btn">Add transaction</button>
-        </form>
-
-          <button className="btn" onClick={handleSaveAndCalculate}>
-            Save and Calculate
-          </button>
-
-      </>
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+            <button className="btn" onClick={handleSaveAndCalculate}>
+              Save and Calculate
+            </button>
+          </div>
+        </CardContent>
+      </Card>
   );
 };
 

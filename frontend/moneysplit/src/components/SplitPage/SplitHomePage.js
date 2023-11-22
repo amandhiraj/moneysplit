@@ -21,9 +21,10 @@ function SplitHomePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isNotFound, setIsNotFound] = useState(false);
     const navigate = useNavigate();
-    const [hasSettledTransactions, setSettledTransactions] = useState(expense && expense.membersList.length > 1);
+    const [hasSettledTransactions, setSettledTransactions] = useState(false);
     const [unsavedChanges, setUnsavedChanges] = useState(false); // Track unsaved changes
 
+    console.log(expense.settledTransactions.length <= 0 + "  " + hasSettledTransactions)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -33,6 +34,8 @@ function SplitHomePage() {
                     setIsNotFound(true);
                 } else {
                     const dataApi = await response.json();
+                    console.log(dataApi.settledTransactions.length)
+                    setSettledTransactions(dataApi.settledTransactions.length > 1)
                     updateExpenseData(dataApi);
                 }
             } catch (error) {
@@ -66,11 +69,7 @@ function SplitHomePage() {
                 </Toolbar>
             </AppBar>
             <div className="main-container">
-                {hasSettledTransactions ? (
-                    <SettledPage
-                        hasSettledTransactions={hasSettledTransactions}
-                        setSettledTransactions={setSettledTransactions} />
-                ) : (
+                {hasSettledTransactions === false ? (
                     <>
                         <MemberList />
                         <Header />
@@ -80,7 +79,14 @@ function SplitHomePage() {
                         <AddTransaction unsavedChanges={unsavedChanges} setUnsavedChanges={setUnsavedChanges}/>
                         <ShareBox />
                     </>
-                )}
+                ) : (
+                    <>
+                        <SettledPage
+                            hasSettledTransactions={hasSettledTransactions}
+                            setSettledTransactions={setSettledTransactions} />
+                    </>
+
+                    )}
             </div>
         </>
     );
